@@ -37,3 +37,15 @@ exports.deleteBook = (req, res) => {
   books.splice(index, 1);
   res.status(204).send();
 };
+
+// Update a book by ID
+exports.updateBook = (req, res) => {
+  const { title, author } = req.body;
+  const book = books.find(b => b.id === parseInt(req.params.id));
+  if (!book) {
+    return res.status(404).json({ error: 'Book not found.' });
+  }
+  if (title) book.title = title;
+  if (author) book.author = author;
+  res.json(book);
+};
