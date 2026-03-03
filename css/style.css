@@ -408,6 +408,37 @@ ul {
 }
 
 /* =============================================
+   BOOK RATING - Hiển thị sao đánh giá
+   ============================================= */
+.book-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.book-rating .star {
+    font-size: 0.9rem;
+    color: #f39c12;
+}
+
+.book-rating .star-empty {
+    color: #ddd;
+}
+
+.book-rating .star-half {
+    position: relative;
+    display: inline-block;
+}
+
+.rating-number {
+    font-size: 0.85rem;
+    color: #666;
+    margin-left: 5px;
+    font-weight: 500;
+}
+
+/* =============================================
    BADGES
    ============================================= */
 .badge {

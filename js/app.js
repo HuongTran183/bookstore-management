@@ -133,6 +133,10 @@ function renderBooks(bookList) {
                     <a href="detail.html?id=${book.id}">${book.title}</a>
                 </h3>
                 <p class="book-author">✍️ ${book.author}</p>
+                <div class="book-rating">
+                    ${renderStars(book.rating)}
+                    <span class="rating-number">${book.rating || '0'}</span>
+                </div>
                 <p class="book-description">${book.description}</p>
                 <div class="book-footer">
                     <span class="book-price">${formatPrice(book.price)}</span>
@@ -309,6 +313,41 @@ function showSuggestions(query) {
     `).join('');
 
     searchSuggestions.classList.add('active');
+}
+
+// =============================================
+// RATING STARS - Hiển thị sao đánh giá
+// =============================================
+
+/**
+ * Render stars hiển thị đánh giá
+ * @param {number} rating - Điểm đánh giá (0-5)
+ * @returns {string} HTML chuỗi sao
+ */
+function renderStars(rating) {
+    const maxStars = 5;
+    const fullStars = Math.floor(rating || 0);
+    const hasHalfStar = (rating || 0) % 1 >= 0.5;
+    const emptyStars = maxStars - fullStars - (hasHalfStar ? 1 : 0);
+    
+    let starsHTML = '';
+    
+    // Full stars
+    for (let i = 0; i < fullStars; i++) {
+        starsHTML += '<span class="star">★</span>';
+    }
+    
+    // Half star
+    if (hasHalfStar) {
+        starsHTML += '<span class="star star-half">★</span>';
+    }
+    
+    // Empty stars
+    for (let i = 0; i < emptyStars; i++) {
+        starsHTML += '<span class="star star-empty">★</span>';
+    }
+    
+    return starsHTML;
 }
 
 // =============================================

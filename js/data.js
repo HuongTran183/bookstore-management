@@ -104,19 +104,73 @@ const books = [
     },
 
     // ==============================================
-    // 🔽 THÊM SÁCH MỚI BÊN DƯỚI DÒNG NÀY 🔽
-    // Mỗi thành viên thêm 2-3 cuốn sách
-    // ID tiếp theo: 9
-    // Format:
-    // {
-    //     id: 9,
-    //     title: "Tên sách",
-    //     author: "Tác giả",
-    //     price: 100000,
-    //     category: "programming|science|literature|business",
-    //     categoryName: "Tên thể loại tiếng Việt",
-    //     emoji: "📖",
-    //     description: "Mô tả ngắn về cuốn sách"
-    // },
+    // THÊM SÁCH MỚI - ID: 9-14
+    // ==============================================
+    {
+        id: 9,
+        title: "Design Patterns",
+        author: "Gang of Four",
+        price: 285000,
+        category: "programming",
+        categoryName: "Lập trình",
+        emoji: "🎨",
+        description: "Cuốn sách kinh điển về các mẫu thiết kế phần mềm, giải quyết các vấn đề thiết kế hướng đối tượng.",
+        rating: 4.7
+    },
+    {
+        id: 10,
+        title: "Head First HTML",
+        author: "Elisabeth Robson",
+        price: 195000,
+        category: "programming",
+        categoryName: "Lập trình",
+        emoji: "🌐",
+        description: "Hướng dẫn học HTML theo phương pháp trực quan, dễ hiểu cho người mới bắt đầu.",
+        rating: 4.4
+    },
+    {
+        id: 11,
+        title: "Vũ Trụ Trong Vỏ Hạt",
+        author: "Stephen Hawking",
+        price: 180000,
+        category: "science",
+        categoryName: "Khoa học",
+        emoji: "🌌",
+        description: "Khám phá những bí ẩn của vũ trụ từ lượng tử đến siêu hấp dẫn, viết dễ hiểu cho mọi người.",
+        rating: 4.8
+    },
+    {
+        id: 12,
+        title: "Tôi Thấy Hoa Vàng Trên Cỏ Xanh",
+        author: "Nguyễn Nhật Ánh",
+        price: 95000,
+        category: "literature",
+        categoryName: "Văn học",
+        emoji: "🌻",
+        description: "Câu chuyện tuổi thơ về tình bạn, tình yêu và những ký ức đẹp đẽ trong làng quê Việt Nam.",
+        rating: 4.9
+    },
+    {
+        id: 13,
+        title: "Nhà Lãnh Đạo Không Chức Danh",
+        author: "Robin Sharma",
+        price: 145000,
+        category: "business",
+        categoryName: "Kinh doanh",
+        emoji: "👔",
+        description: "Học cách trở thành nhà lãnh đạo tự nhiên, gây ảnh hưởng mà không cần chức vị formal.",
+        rating: 4.5
+    },
+    {
+        id: 14,
+        title: "The Lean Startup",
+        author: "Eric Ries",
+        price: 220000,
+        category: "business",
+        categoryName: "Kinh doanh",
+        emoji: "💡",
+        description: "Phương pháp khởi nghiệp tinh gọn giúp xây dựng doanh nghiệp thành công nhanh chóng.",
+        rating: 4.6
+    }
     // ==============================================
 ];
