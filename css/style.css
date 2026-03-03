@@ -439,6 +439,26 @@ ul {
     color: #e65100;
 }
 
+.badge-novel {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.badge-history {
+    background-color: #efebe9;
+    color: #5d4037;
+}
+
+.badge-philosophy {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+}
+
+.badge-selfhelp {
+    background-color: #fff8e1;
+    color: #ff8f00;
+}
+
 /* =============================================
    BUTTONS - Khu vực dễ CONFLICT
    Thay đổi màu sắc, border-radius, hiệu ứng

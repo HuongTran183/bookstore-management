@@ -171,6 +171,113 @@ const books = [
         emoji: "💡",
         description: "Phương pháp khởi nghiệp tinh gọn giúp xây dựng doanh nghiệp thành công nhanh chóng.",
         rating: 4.6
+    },
+
+    // ===== SÁCH TIỂU THUYẾT =====
+    {
+        id: 15,
+        title: "Harry Potter và Hòn Đá Phù Thủy",
+        author: "J.K. Rowling",
+        price: 250000,
+        category: "novel",
+        categoryName: "Tiểu thuyết",
+        emoji: "🧙",
+        description: "Câu chuyện về chàng phù thủy nhỏ Harry Potter và những cuộc phiêu lưu tại Hogwarts.",
+        rating: 4.9
+    },
+    {
+        id: 16,
+        title: "Giết Con Chim Tưởng Nhớ",
+        author: "Harper Lee",
+        price: 120000,
+        category: "novel",
+        categoryName: "Tiểu thuyết",
+        emoji: "🐦",
+        description: "Cuốn tiểu thuyết kinh điển về sự trưởng thành và công lý trong xã hội Mỹ.",
+        rating: 4.7
+    },
+
+    // ===== SÁCH LỊCH SỬ =====
+    {
+        id: 17,
+        title: "Sử Ký Việt Nam",
+        author: "Nguyễn Danh Phiệt",
+        price: 350000,
+        category: "history",
+        categoryName: "Lịch sử",
+        emoji: "📜",
+        description: "Tổng hợp lịch sử Việt Nam từ thời kỳ cổ đại đến hiện đại.",
+        rating: 4.5
+    },
+    {
+        id: 18,
+        title: "Chiến Tranh Thế Giới Thứ Hai",
+        author: "Winston Churchill",
+        price: 480000,
+        category: "history",
+        categoryName: "Lịch sử",
+        emoji: "⚔️",
+        description: "Bức tranh toàn diện về cuộc chiến tranh thay đổi lịch sử thế giới.",
+        rating: 4.8
+    },
+
+    // ===== SÁCH TRIẾT HỌC =====
+    {
+        id: 19,
+        title: "Tư Tưởng Hồ Chí Minh",
+        author: "Hồ Chí Minh",
+        price: 75000,
+        category: "philosophy",
+        categoryName: "Triết học",
+        emoji: "💭",
+        description: "Tuyển tập các bài viết về tư tưởng Hồ Chí Minh.",
+        rating: 4.6
+    },
+    {
+        id: 20,
+        title: "Nghệ Thuật Sống",
+        author: "Dale Carnegie",
+        price: 89000,
+        category: "philosophy",
+        categoryName: "Triết học",
+        emoji: "🎯",
+        description: "Những bài học quý giá về nghệ thuật sống và làm việc hiệu quả.",
+        rating: 4.5
+    },
+
+    // ===== SÁCH PHÁT TRIỂN BẢN THÂN =====
+    {
+        id: 21,
+        title: "7 Thói Quen Hiệu Quả",
+        author: "Stephen Covey",
+        price: 165000,
+        category: "selfhelp",
+        categoryName: "Phát triển bản thân",
+        emoji: "🚀",
+        description: "Cuốn sách kinh điển về phát triển cá nhân và lãnh đạo bản thân.",
+        rating: 4.8
+    },
+    {
+        id: 22,
+        title: "Sức Mạnh Của Thói Quen",
+        author: "Charles Duhigg",
+        price: 155000,
+        category: "selfhelp",
+        categoryName: "Phát triển bản thân",
+        emoji: "💪",
+        description: "Khám phá khoa học về thói quen và cách thay đổi cuộc sống.",
+        rating: 4.6
+    },
+    {
+        id: 23,
+        title: "Từ Tốt Đến Vĩ Đại",
+        author: "Jim Collins",
+        price: 210000,
+        category: "selfhelp",
+        categoryName: "Phát triển bản thân",
+        emoji: "📈",
+        description: "Nghiên cứu về các công ty chuyển từ tốt sang vĩ đại.",
+        rating: 4.7
     }
     // ==============================================
 ];
