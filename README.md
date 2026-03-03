@@ -167,3 +167,4 @@ Các file sau được thiết kế để **dễ xảy ra conflict** khi merge, 
 ## 📜 License
 
 Dự án demo phục vụ mục đích học tập. Free to use! 🎓
+Dự án demo phục vụ mục đích học tập. Free to use! 🎓
