@@ -337,6 +337,7 @@ ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
+    justify-content: center;
 }
 
 .book-card {
@@ -388,10 +389,9 @@ ul {
     font-size: 0.85rem;
     margin-bottom: 15px;
     flex: 1;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
     overflow: hidden;
+    max-height: 2.8em;
+    line-height: 1.4em;
 }
 
 .book-footer {
@@ -437,6 +437,26 @@ ul {
 .badge-business {
     background-color: #fff3e0;
     color: #e65100;
+}
+
+.badge-novel {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.badge-history {
+    background-color: #efebe9;
+    color: #5d4037;
+}
+
+.badge-philosophy {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+}
+
+.badge-selfhelp {
+    background-color: #fff8e1;
+    color: #ff8f00;
 }
 
 /* =============================================
