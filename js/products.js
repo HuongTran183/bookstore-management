@@ -144,6 +144,35 @@ class ProductsManager {
   getTotalStockValue() {
     return this.products.reduce((total, product) => total + (product.price * product.stock), 0);
   }
+
+  // Get low stock products (less than 10)
+  getLowStockProducts(threshold = 10) {
+    return this.products.filter(product => product.stock < threshold);
+  }
+
+  // Get out of stock products
+  getOutOfStockProducts() {
+    return this.products.filter(product => product.stock === 0);
+  }
+
+  // Validate if we can reduce stock by given quantity
+  canReduceStock(id, quantity) {
+    const product = this.getProductById(id);
+    if (!product) return false;
+    return product.stock >= quantity;
+  }
+
+  // Get product with current stock status
+  getProductWithStockStatus(id) {
+    const product = this.getProductById(id);
+    if (!product) return null;
+    
+    return {
+      ...product,
+      isInStock: product.stock > 0,
+      stockStatus: product.stock > 10 ? 'in stock' : product.stock > 0 ? 'low stock' : 'out of stock'
+    };
+  }
 }
 
 // Initialize products manager
