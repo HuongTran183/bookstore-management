@@ -10,11 +10,12 @@ exports.getAllBooks = (req, res) => {
 
 // Add a new book
 exports.addBook = (req, res) => {
-  const { title, author } = req.body;
+  const { title, author, year } = req.body;
   if (!title || !author) {
     return res.status(400).json({ error: 'Title and author are required.' });
   }
-  const newBook = { id: books.length + 1, title, author };
+  const nextId = books.length === 0 ? 1 : Math.max(...books.map(b => b.id)) + 1;
+  const newBook = { id: nextId, title, author };
   books.push(newBook);
   res.status(201).json(newBook);
 };
@@ -40,10 +41,17 @@ exports.deleteBook = (req, res) => {
 
 // Update a book by ID
 exports.updateBook = (req, res) => {
+  const id = parseBookId(req.params.id);
+  if (id === null) {
+    return res.status(400).json({ error: 'Invalid book ID. ID must be a positive integer.' });
+  }
   const { title, author } = req.body;
-  const book = books.find(b => b.id === parseInt(req.params.id));
+  const book = books.find(b => b.id === id);
   if (!book) {
     return res.status(404).json({ error: 'Book not found.' });
+  }
+  if (!title && !author) {
+    return res.status(400).json({ error: 'At least one of title or author must be provided to update the book.' });
   }
   if (title) book.title = title;
   if (author) book.author = author;
