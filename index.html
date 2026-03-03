@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookStore - Nhà Sách Online</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER - Khu vực dễ CONFLICT
+         Mỗi thành viên có thể sửa nav, logo, search
+         ============================================ -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    📚 BookStore
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link active">Trang Chủ</a>
+                    <a href="cart.html" class="nav-link">
+                        🛒 Giỏ Hàng (<span id="cart-count">0</span>)
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Chào mừng đến với BookStore</h1>
+            <p>Khám phá kho tàng sách phong phú với hàng ngàn đầu sách hay</p>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FILTER / SEARCH - Khu vực dễ CONFLICT
+         Nhiều người cùng thêm filter, search, sort
+         ============================================ -->
+    <section class="filters">
+        <div class="container">
+            <div class="filter-bar">
+                <!-- Search với icon và autocomplete -->
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search-input" class="search-input" placeholder="Tìm kiếm sách..." autocomplete="off">
+                    <button type="button" id="search-clear" class="search-clear" style="display: none;">✕</button>
+                    <ul id="search-suggestions" class="search-suggestions"></ul>
+                </div>
+
+                <!-- Filter theo thể loại -->
+                <select id="category-filter" class="filter-select">
+                    <option value="all">📚 Tất cả thể loại</option>
+                    <option value="programming">💻 Lập trình</option>
+                    <option value="science">🔬 Khoa học</option>
+                    <option value="literature">📖 Văn học</option>
+                    <option value="business">💼 Kinh doanh</option>
+                </select>
+
+                <!-- Filter theo giá -->
+                <select id="price-filter" class="filter-select">
+                    <option value="all">💰 Tất cả giá</option>
+                    <option value="under-100">Dưới 100.000đ</option>
+                    <option value="100-200">100.000 - 200.000đ</option>
+                    <option value="over-200">Trên 200.000đ</option>
+                </select>
+
+                <!-- Filter theo rating -->
+                <select id="rating-filter" class="filter-select">
+                    <option value="all">⭐ Tất cả đánh giá</option>
+                    <option value="4">⭐ 4+ sao</option>
+                    <option value="3">⭐ 3+ sao</option>
+                </select>
+
+                <!-- Sắp xếp -->
+                <select id="sort-select" class="filter-select">
+                    <option value="default">🔃 Sắp xếp</option>
+                    <option value="price-asc">Giá tăng dần</option>
+                    <option value="price-desc">Giá giảm dần</option>
+                    <option value="name-asc">Tên A-Z</option>
+                    <option value="rating-desc">Rating cao nhất</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <section class="catalog-categories">
+        <div class="container">
+            <div class="catalog-panel">
+                <div>
+                    <h2 class="catalog-title">Danh mục sách</h2>
+                    <p class="catalog-description">Lọc nhanh theo thể loại để xem đúng nhóm sách bạn quan tâm.</p>
+                </div>
+                <div id="category-list" class="category-list">
+                    <span class="category-placeholder">Danh mục đang được tải...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOK LIST -->
+    <main class="main">
+        <div class="container">
+            <h2 class="section-title">Danh Sách Sách</h2>
+            <p id="catalog-selection" class="catalog-selection">Đang xem: Tất cả thể loại</p>
+            <div id="book-list" class="book-grid">
+                <!-- Books sẽ được render bởi JavaScript -->
+            </div>
+            <div id="no-results" class="no-results" style="display: none;">
+                <p>😕 Không tìm thấy sách phù hợp.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================
+         FOOTER - Khu vực dễ CONFLICT
+         Mỗi người có thể thêm link, info, social
+         ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>📚 BookStore</h3>
+                    <p>Website bán sách demo - Dự án thực hành Git/GitHub</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liên kết</h3>
+                    <ul>
+                        <li><a href="index.html">Trang chủ</a></li>
+                        <li><a href="cart.html">Giỏ hàng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Thông tin</h3>
+                    <p>Email: contact@bookstore.demo</p>
+                    <p>Phone: 0123-456-789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BookStore. Made with ❤️ by Team.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

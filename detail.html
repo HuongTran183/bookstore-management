@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sách - BookStore</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    📚 BookStore
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Trang Chủ</a>
+                    <a href="cart.html" class="nav-link">
+                        🛒 Giỏ Hàng (<span id="cart-count">0</span>)
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <a href="index.html" class="back-link">← Quay lại danh sách</a>
+
+            <div id="book-detail" class="book-detail">
+                <!-- Book detail sẽ được render bởi JavaScript -->
+            </div>
+
+            <!-- Similar Products Section -->
+            <section id="similar-section" class="similar-section" style="display: none;">
+                <h2 class="similar-title">📚 Sách tương tự</h2>
+                <div id="similar-books" class="book-grid">
+                    <!-- Similar books sẽ được render bởi JavaScript -->
+                </div>
+            </section>
+
+            <!-- Reviews Section -->
+            <section class="reviews-section">
+                <h2 class="reviews-title">⭐ Đánh giá từ độc giả</h2>
+                <div class="reviews-list">
+                    <div class="review-item">
+                        <div class="review-header">
+                            <strong class="review-author">Nguyễn Văn A</strong>
+                            <span class="review-rating">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="review-text">Quyển sách rất hay! Nội dung sâu sắc, cách viết dễ hiểu. Tôi đã học được nhiều điều bổ ích từ cuốn sách này.</p>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <strong class="review-author">Trần Thị B</strong>
+                            <span class="review-rating">⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="review-text">Nội dung chi tiết, dễ hiểu. Rất phù hợp cho những người mới bắt đầu. Mua lại lần thứ 2 để tặng bạn.</p>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <strong class="review-author">Lê Minh C</strong>
+                            <span class="review-rating">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p class="review-text">Tuyệt vời! Cách giải thích rõ ràng với ví dụ thực tế. Đây là một trong những cuốn sách hay nhất mà tôi từng đọc.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div id="not-found" class="no-results" style="display: none;">
+                <p>😕 Không tìm thấy sách.</p>
+                <a href="index.html" class="btn btn-primary">Về trang chủ</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 BookStore. Made with ❤️ by Team.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        // ============================================
+        // BOOK DETAIL PAGE
+        // Khu vực dễ CONFLICT: format giá, layout, nút
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+            const bookId = parseInt(params.get('id'));
+            const book = books.find(b => b.id === bookId);
+
+            if (!book) {
+                document.getElementById('not-found').style.display = 'block';
+                return;
+            }
+
+            document.title = book.title + ' - BookStore';
+
+            const detailHTML = `
+                <div class="detail-card">
+                    <div class="detail-image">
+                        <div class="book-cover-large">${book.emoji || '📖'}</div>
+                    </div>
+                    <div class="detail-info">
+                        <h1 class="detail-title">${book.title}</h1>
+                        <p class="detail-author">✍️ ${book.author}</p>
+                        <span class="badge badge-${book.category}">${book.categoryName}</span>
+                        <p class="detail-description">${book.description}</p>
+                        <div class="detail-price">${book.price.toLocaleString('vi-VN')}đ</div>
+                        <div class="detail-actions">
+                            <button class="btn btn-primary btn-large" onclick="addToCart(${book.id})">
+                                🛒 Thêm vào giỏ hàng
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('book-detail').innerHTML = detailHTML;
+
+            // Display similar books
+            displaySimilarBooks(book);
+            updateCartCount();
+        });
+
+        // Function to display similar books based on category
+        function displaySimilarBooks(currentBook) {
+            // Get books from the same category, excluding current book
+            const similarBooks = books.filter(b => 
+                b.category === currentBook.category && b.id !== currentBook.id
+            ).slice(0, 4); // Show max 4 similar books
+
+            if (similarBooks.length === 0) {
+                document.getElementById('similar-section').style.display = 'none';
+                return;
+            }
+
+            const similarBooksHTML = similarBooks.map(book => `
+                <a href="detail.html?id=${book.id}" class="book-card-link">
+                    <div class="book-card">
+                        <div class="book-cover">${book.emoji || '📖'}</div>
+                        <div class="book-info">
+                            <h3 class="book-title">${book.title}</h3>
+                            <p class="book-author">${book.author}</p>
+                            <p class="book-description">${book.description}</p>
+                            <div class="book-footer">
+                                <span class="book-price">${book.price.toLocaleString('vi-VN')}đ</span>
+                                <button class="btn btn-small btn-primary" onclick="event.preventDefault(); addToCart(${book.id})">
+                                    🛒
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+
+            document.getElementById('similar-books').innerHTML = similarBooksHTML;
+            document.getElementById('similar-section').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
