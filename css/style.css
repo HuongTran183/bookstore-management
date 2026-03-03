@@ -383,6 +383,31 @@ ul {
     margin-bottom: 10px;
 }
 
+.book-rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 8px;
+}
+
+.book-rating .star {
+    font-size: 1rem;
+    color: #ddd;
+}
+
+.book-rating .star-full {
+    color: #f1c40f;
+}
+
+.book-rating .star-half {
+    color: #f1c40f;
+    opacity: 0.8;
+}
+
+.book-rating .star-empty {
+    color: #eee;
+}
+
 .book-description {
     color: #777;
     font-size: 0.85rem;
@@ -471,6 +496,11 @@ ul {
 
 .btn-secondary:hover {
     background-color: #d5dbdb;
+}
+
+.btn-reset-filters {
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .btn-danger {

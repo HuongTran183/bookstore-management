@@ -30,6 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
         categoryList.addEventListener('click', onCategoryChipClick);
     }
 
+    // Nút đặt lại bộ lọc
+    const resetFiltersBtn = document.getElementById('reset-filters');
+    if (resetFiltersBtn) {
+        resetFiltersBtn.addEventListener('click', resetAllFilters);
+    }
+
     applyFilters();
 });
 
@@ -133,6 +139,7 @@ function renderBooks(bookList) {
                     <a href="detail.html?id=${book.id}">${book.title}</a>
                 </h3>
                 <p class="book-author">✍️ ${book.author}</p>
+                ${book.rating ? `<div class="book-rating" title="${book.rating} sao">${renderRatingStars(book.rating)}</div>` : ''}
                 <p class="book-description">${book.description}</p>
                 <div class="book-footer">
                     <span class="book-price">${formatPrice(book.price)}</span>
@@ -153,6 +160,23 @@ function renderBooks(bookList) {
  */
 function formatPrice(price) {
     return price.toLocaleString('vi-VN') + 'đ';
+}
+
+/**
+ * Render HTML chuỗi sao đánh giá (1–5)
+ * @param {number} rating - Điểm đánh giá (vd: 4.5)
+ * @returns {string} Chuỗi HTML sao vàng/xám
+ */
+function renderRatingStars(rating) {
+    if (!rating || rating < 0) return '';
+    const full = Math.floor(rating);
+    const hasHalf = rating % 1 >= 0.5;
+    let html = '';
+    for (let i = 0; i < full; i++) html += '<span class="star star-full">★</span>';
+    if (hasHalf) html += '<span class="star star-half">★</span>';
+    const empty = 5 - full - (hasHalf ? 1 : 0);
+    for (let i = 0; i < empty; i++) html += '<span class="star star-empty">★</span>';
+    return html;
 }
 
 /**
@@ -240,6 +264,31 @@ function updateCatalogSelection(category, resultCount) {
 // =============================================
 // SEARCH ENHANCEMENTS - Clear & Autocomplete
 // =============================================
+
+/**
+ * Đặt lại toàn bộ bộ lọc và ô tìm kiếm về mặc định
+ */
+function resetAllFilters() {
+    const searchInput = document.getElementById('search-input');
+    const searchClear = document.getElementById('search-clear');
+    const searchSuggestions = document.getElementById('search-suggestions');
+
+    if (searchInput) searchInput.value = '';
+    if (searchClear) searchClear.style.display = 'none';
+    if (searchSuggestions) searchSuggestions.classList.remove('active');
+
+    const categoryFilter = document.getElementById('category-filter');
+    const priceFilter = document.getElementById('price-filter');
+    const ratingFilter = document.getElementById('rating-filter');
+    const sortSelect = document.getElementById('sort-select');
+
+    if (categoryFilter) categoryFilter.value = 'all';
+    if (priceFilter) priceFilter.value = 'all';
+    if (ratingFilter) ratingFilter.value = 'all';
+    if (sortSelect) sortSelect.value = 'default';
+
+    applyFilters();
+}
 
 function initSearchEnhancements() {
     const searchClear = document.getElementById('search-clear');
