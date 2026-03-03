@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng - BookStore</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    📚 BookStore
+                </a>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Trang Chủ</a>
+                    <a href="cart.html" class="nav-link active">
+                        🛒 Giỏ Hàng (<span id="cart-count">0</span>)
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h2 class="section-title">🛒 Giỏ Hàng Của Bạn</h2>
+
+            <div id="cart-empty" class="no-results" style="display: none;">
+                <p>🛒 Giỏ hàng trống!</p>
+                <a href="index.html" class="btn btn-primary">Tiếp tục mua sắm</a>
+            </div>
+
+            <div id="cart-content" style="display: none;">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Sách</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items">
+                        <!-- Cart items sẽ được render bởi JavaScript -->
+                    </tbody>
+                </table>
+
+                <!-- ============================================
+                     CART SUMMARY - Khu vực dễ CONFLICT
+                     Discount, shipping, total format
+                     ============================================ -->
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Tạm tính:</span>
+                        <span id="subtotal">0đ</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Phí vận chuyển:</span>
+                        <span id="shipping">0đ</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Tổng cộng:</span>
+                        <span id="total">0đ</span>
+                    </div>
+                    <div class="cart-actions">
+                        <a href="index.html" class="btn btn-secondary">Tiếp tục mua sắm</a>
+                        <button class="btn btn-primary" onclick="checkout()">Thanh Toán</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 BookStore. Made with ❤️ by Team.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        // ============================================
+        // CART PAGE RENDER
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', function () {
+            renderCart();
+        });
+
+        function renderCart() {
+            const cart = getCart();
+            const cartEmpty = document.getElementById('cart-empty');
+            const cartContent = document.getElementById('cart-content');
+
+            if (cart.length === 0) {
+                cartEmpty.style.display = 'block';
+                cartContent.style.display = 'none';
+                updateCartCount();
+                return;
+            }
+
+            cartEmpty.style.display = 'none';
+            cartContent.style.display = 'block';
+
+            const tbody = document.getElementById('cart-items');
+            let subtotal = 0;
+
+            tbody.innerHTML = cart.map(item => {
+                const book = books.find(b => b.id === item.id);
+                if (!book) return '';
+                const itemTotal = book.price * item.quantity;
+                subtotal += itemTotal;
+
+                return `
+                    <tr>
+                        <td>
+                            <div class="cart-item-info">
+                                <span class="cart-item-emoji">${book.emoji || '📖'}</span>
+                                <div>
+                                    <strong>${book.title}</strong>
+                                    <br><small>${book.author}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${book.price.toLocaleString('vi-VN')}đ</td>
+                        <td>
+                            <div class="quantity-control">
+                                <button class="btn-qty" onclick="changeQty(${book.id}, -1)">-</button>
+                                <span class="qty-display">${item.quantity}</span>
+                                <button class="btn-qty" onclick="changeQty(${book.id}, 1)">+</button>
+                            </div>
+                        </td>
+                        <td><strong>${itemTotal.toLocaleString('vi-VN')}đ</strong></td>
+                        <td>
+                            <button class="btn btn-danger btn-small" onclick="removeAndRender(${book.id})">🗑️</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            // Tính phí ship: miễn phí nếu > 300.000đ
+            const shipping = subtotal >= 300000 ? 0 : 30000;
+            const total = subtotal + shipping;
+
+            document.getElementById('subtotal').textContent = subtotal.toLocaleString('vi-VN') + 'đ';
+            document.getElementById('shipping').textContent = shipping === 0 ? 'Miễn phí' : shipping.toLocaleString('vi-VN') + 'đ';
+            document.getElementById('total').textContent = total.toLocaleString('vi-VN') + 'đ';
+
+            updateCartCount();
+        }
+
+        function changeQty(bookId, delta) {
+            updateQuantity(bookId, delta);
+            renderCart();
+        }
+
+        function removeAndRender(bookId) {
+            removeFromCart(bookId);
+            renderCart();
+        }
+
+        function checkout() {
+            alert('🎉 Cảm ơn bạn đã mua hàng! (Demo)');
+            localStorage.removeItem('bookstore_cart');
+            renderCart();
+        }
+    </script>
+</body>
+
+</html>
